@@ -4,9 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CatalogAdmin"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+    <ui:SimpleStackPanel Margin="12" Spacing="24" Background="Aqua">
+        <TextBox x:Name="Grp" Height="30" Width="100"/>
+        <Button Click="ButtonBase_OnClick" Background="Brown">Click me</Button>
+        <Label x:Name="Grupa"/>
+        <Label x:Name="Materie"/>
+        <Label x:Name="Profesor"/>
+    </ui:SimpleStackPanel>
 </Window>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CatalogBackend.Entities;
+namespace CatalogAdmin.Entities;
 
 public partial class Orar
 {
@@ -26,5 +26,4 @@ public partial class Orar
     public string? Teacher { get; set; }
 
     public string? Week { get; set; }
-    
 }
