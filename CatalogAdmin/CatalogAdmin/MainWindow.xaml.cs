@@ -41,12 +41,12 @@ namespace CatalogAdmin
             {
                 var responseBody = await responseMessage.Content.ReadAsStringAsync();
                 var orar = JsonConvert.DeserializeObject<List<Orar>>(responseBody);
-                Grp.Text = orar[0].Grp;
+                // Grp.Text = orar[0].Grp;
                 
             }
             else
             {
-                Grp.Text = "Something went wrong";
+                // Grp.Text = "Something went wrong";
             }
         }
     }
