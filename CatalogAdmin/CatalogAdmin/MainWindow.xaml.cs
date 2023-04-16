@@ -28,11 +28,6 @@ namespace CatalogAdmin
             InitializeComponent();
         }
 
-        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            await Request();
-        }
-
         private async Task Request()
         {
             HttpClient client = new HttpClient();
@@ -48,6 +43,7 @@ namespace CatalogAdmin
             {
                 // Grp.Text = "Something went wrong";
             }
+
         }
     }
 }

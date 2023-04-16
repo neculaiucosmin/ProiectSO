@@ -1,15 +1,19 @@
 ﻿using System.Windows.Controls;
-using CatalogAdmin.Entities;
 
-namespace CatalogAdmin.Components;
-
-public partial class CustomRow : UserControl
+namespace CatalogAdmin.Components
 {
-    private Orar _orar;
-    public CustomRow(Orar orar) 
+    /// <summary>
+    /// Interaction logic for CustomRow.xaml
+    /// </summary>
+    public partial class CustomRow : UserControl
     {
-        InitializeComponent();
-        _orar = orar;
-
+        
+        public CustomRow()
+        {
+            InitializeComponent();
+            Group.Text = "DADADADA";
+            Class.Text = "NUNUNUNUNU";
+            
+        }
     }
 }

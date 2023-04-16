@@ -3,11 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CatalogAdmin"
-        xmlns:ui="http://schemas.modernwpf.com/2019"
-        xmlns:components="clr-namespace:CatalogAdmin.Components"
+        xmlns:local="clr-namespace:CatalogAdmin.Components"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <ui:SimpleStackPanel Margin="12" Spacing="24" Background="Aqua">
-    </ui:SimpleStackPanel>
+    <ScrollViewer Margin="12">
+        <ItemsControl>
+        <local:CustomRow></local:CustomRow>
+        <local:CustomRow></local:CustomRow>
+        <local:CustomRow></local:CustomRow>
+            
+        </ItemsControl>
+    </ScrollViewer>
+    
 </Window>
+        <!-- xmlns:ui="http://schemas.modernwpf.com/2019" -->
