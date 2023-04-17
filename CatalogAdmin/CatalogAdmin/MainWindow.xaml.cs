@@ -64,4 +64,9 @@ public partial class MainWindow : Window
             MessageBox.Show("Grupa introdusa nu este corecta.\nEx:10212 ");
         }
     }
+
+    private void Add_OnClickClick(object sender, RoutedEventArgs e)
+    {
+        MyItemsControl.Children.Add(new CustomRow());
+    }
 }

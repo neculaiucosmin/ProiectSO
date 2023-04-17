@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using CatalogAdmin.Entities;
+using Newtonsoft.Json;
 
 namespace CatalogAdmin.Components;
 
@@ -33,6 +34,8 @@ public partial class CustomRow : UserControl
         Module.Text = orar.Module;
         DayOfWeek.Text = orar.DayOffWeek;
         Year.Text = orar.Year.ToString();
+        Type.Text = orar.Type;
+        Week.Text = orar.Week;
         SetIsEnable(false);
     }
 
@@ -43,10 +46,11 @@ public partial class CustomRow : UserControl
         Hours.IsEnabled = set;
         Teacher.IsEnabled = set;
         Classroom.IsEnabled = set;
-        Hours.IsEnabled = set;
         Module.IsEnabled = set;
         DayOfWeek.IsEnabled = set;
         Year.IsEnabled = set;
+        Type.IsEnabled = set;
+        Week.IsEnabled = set;
     }
 
     private async void Delete_OnClick(object sender, RoutedEventArgs e)
@@ -77,6 +81,7 @@ public partial class CustomRow : UserControl
         }
         catch (HttpRequestException)
         {
+            MessageBox.Show("Conexiunea la server a esuat!\nVa rugam incercati din nou");
             throw;
         }
     }
@@ -84,5 +89,38 @@ public partial class CustomRow : UserControl
     private void Edit_OnClick(object sender, RoutedEventArgs e)
     {
         SetIsEnable(true);
+    }
+
+    private async void Save_OnClick(object sender, RoutedEventArgs e)
+    {
+        Orar orar = new Orar()
+        {
+            Grp = Group.Text,
+            DayOffWeek = DayOfWeek.Text,
+            Year = Convert.ToInt16(Year.Text),
+            Hours = Hours.Text,
+            Module = Module.Text,
+            Class = Class.Text,
+            Teacher = Teacher.Text,
+            Classroom = Classroom.Text,
+            Type = Type.Text,
+            Week = Week.Text
+        };
+
+        var handler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        };
+
+        var client = new HttpClient(handler);
+        
+        var orarJson = JsonConvert.SerializeObject(orar);
+        var content = new StringContent(orarJson, System.Text.Encoding.UTF8, "application/json");
+        var responseMessage = await client.PostAsync("https://localhost:44346/orar/v1", content);
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            SetIsEnable(false);
+        }
     }
 }

@@ -22,7 +22,7 @@ public class OrarController : Controller
     //Http Controller -> return all rows in database
     [HttpGet]
     [Route("/all")]
-    public async Task<ActionResult<IEnumerable<Orar>>> getAll()
+    public async Task<ActionResult<IEnumerable<Orar>>> GetAll()
     {
         if (_context.Orars == null) return NotFound();
 
@@ -39,7 +39,7 @@ public class OrarController : Controller
         if (orar.IsNullOrEmpty()) return NotFound();
         return orar;
     }
-
+    
     //Http post requests: 
     [HttpPost]
     public async Task<ActionResult<Orar>> PostOrar(Orar orar)
