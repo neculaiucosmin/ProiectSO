@@ -75,14 +75,20 @@ public class OrarController : Controller
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteOrar(long id)
     {
-        if (_context.Orars == null) return NotFound();
+        if (_context.Orars == null)
+        {
+            return NotFound();
+        }
 
         var orar = await _context.Orars.FindAsync(id);
-        if (orar == null) return NotFound();
+        if (orar == null)
+        {
+            return NotFound();
+        }
 
         _context.Orars.Remove(orar);
         await _context.SaveChangesAsync();
-
+        
         return NoContent();
     }
 

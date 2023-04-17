@@ -1,6 +1,9 @@
-﻿namespace CatalogAdmin.Entities;
+﻿using System;
+using System.Collections.Generic;
 
-public class Orar
+namespace CatalogAdmin.Entities;
+
+public partial class Orar
 {
     public long Id { get; set; }
 

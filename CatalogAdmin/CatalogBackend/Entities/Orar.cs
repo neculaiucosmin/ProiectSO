@@ -1,6 +1,9 @@
-﻿namespace CatalogBackend.Entities;
+﻿using System;
+using System.Collections.Generic;
 
-public class Orar
+namespace CatalogBackend.Entities;
+
+public partial class Orar
 {
     public long Id { get; set; }
 
@@ -23,4 +26,5 @@ public class Orar
     public string? Teacher { get; set; }
 
     public string? Week { get; set; }
+    
 }
