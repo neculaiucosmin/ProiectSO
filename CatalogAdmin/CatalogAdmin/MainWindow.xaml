@@ -3,17 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CatalogAdmin.Components"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <ScrollViewer Margin="12">
-        <ItemsControl>
-        <local:CustomRow></local:CustomRow>
-        <local:CustomRow></local:CustomRow>
-        <local:CustomRow></local:CustomRow>
-            
-        </ItemsControl>
-    </ScrollViewer>
-    
+        Title="MainWindow" Height="500" Width="800">
+
+    <Grid>
+        <Grid Height="50" VerticalAlignment="Top" HorizontalAlignment="Center" Width="369">
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="Auto" MinWidth="100" />
+                <ColumnDefinition Width="Auto" MinWidth="100" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="Search" Grid.Column="0" Width="200" Margin="3 10 10 9" Padding=" 1 1 1 1" Style="{StaticResource ModernTextBoxStyle}"/>
+
+            <Button Grid.Column="1"  Content="Click Me" Click="ButtonBase_OnClick"
+                    Style="{StaticResource ModernButtonStyle}" Height="30" Width="100" />
+        </Grid>
+
+        <ScrollViewer Margin="12,55,12,12" HorizontalScrollBarVisibility="Visible" x:Name="ScrollViewer">
+            <ui:SimpleStackPanel x:Name="MyItemsControl" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <!-- <local:CustomRow /> -->
+                <!-- <local:CustomRow /> -->
+                <!-- <local:CustomRow /> -->
+
+            </ui:SimpleStackPanel>
+        </ScrollViewer>
+    </Grid>
+
 </Window>
-        <!-- xmlns:ui="http://schemas.modernwpf.com/2019" -->
+<!-- xmlns:ui="http://schemas.modernwpf.com/2019" -->
