@@ -19,6 +19,10 @@
                     <ColumnDefinition Width="Auto" MinWidth="100" />
                     <ColumnDefinition Width="Auto" MinWidth="100" />
                     <ColumnDefinition Width="Auto" MinWidth="100" />
+                    <ColumnDefinition Width="Auto" MinWidth="100" />
+                    <ColumnDefinition Width="Auto" MinWidth="100" />
+                    <ColumnDefinition Width="Auto" MinWidth="100" />
+                    <ColumnDefinition Width="Auto" MinWidth="100" />
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
@@ -117,7 +121,7 @@
                         <ComboBoxItem Content="Duminica" />
                     </ComboBox>
                 </Grid>
-                <Grid Grid.Column="6">
+                <Grid Grid.Column="7">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -131,14 +135,42 @@
                         <ComboBoxItem Content="3" />
                         <ComboBoxItem Content="4" />
                     </ComboBox>
+                </Grid>                
+                <Grid Grid.Column="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Tip modul" Grid.Row="0" Margin="0 " Padding="5 0 0 5" Style="{StaticResource LabelStyle}" />
+                    <ComboBox Grid.Row="1" x:Name="Type" Margin="3">
+                        <ComboBoxItem Content="C" />
+                        <ComboBoxItem Content="L" />
+                        <ComboBoxItem Content="S" />
+                    </ComboBox>
+                </Grid>                
+                <Grid Grid.Column="9">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Saptamana" Grid.Row="0" Margin="0 " Padding="5 0 0 5" Style="{StaticResource LabelStyle}" />
+                    <ComboBox Grid.Row="1" x:Name="Week" Margin="3">
+                        <ComboBoxItem Content="S" />
+                        <ComboBoxItem Content="D" />
+                        <ComboBoxItem Content="S+D" />
+                    </ComboBox>
                 </Grid>
 
                 <!-- Control Buttons -->
-                <Button Grid.Column="7" Content="Edit" x:Name="Edit" Margin="3" Width="75"
+                <Button Grid.Column="10" Content="Edit" x:Name="Edit" Margin="3" Width="75"
                         Style="{StaticResource ModernButtonStyle}" Click="Edit_OnClick"/>
-                <Button Grid.Column="8" x:Name="Save" Content="Save" Margin="3" Width="75"
-                        Style="{StaticResource ModernButtonStyle}" />
-                <Button Grid.Column="9" x:Name="Delete" Content="Delete" Margin="3" Width="75"
+                <Button Grid.Column="11" x:Name="Save" Content="Save" Margin="3" Width="75"
+                        Style="{StaticResource ModernButtonStyle}" Click="Save_OnClick"/>
+                <Button Grid.Column="12" x:Name="Delete" Content="Delete" Margin="3" Width="75"
                         Style="{StaticResource ModernButtonStyle}" Click="Delete_OnClick" />
             </Grid>
         </ui:SimpleStackPanel>
