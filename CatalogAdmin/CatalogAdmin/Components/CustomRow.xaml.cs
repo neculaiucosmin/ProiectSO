@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using CatalogAdmin.Entities;
+using ModernWpf.Controls;
 using Newtonsoft.Json;
 
 namespace CatalogAdmin.Components;
@@ -15,7 +16,7 @@ namespace CatalogAdmin.Components;
 public partial class CustomRow : UserControl
 {
     private readonly Orar _orar;
-
+    private bool _isNewWindow = true;
     public CustomRow()
     {
         InitializeComponent();
@@ -25,6 +26,7 @@ public partial class CustomRow : UserControl
     {
         _orar = orar;
         InitializeComponent();
+        
         Group.Text = orar.Grp;
         Class.Text = orar.Class;
         Hours.Text = orar.Hours;
@@ -36,6 +38,9 @@ public partial class CustomRow : UserControl
         Year.Text = orar.Year.ToString();
         Type.Text = orar.Type;
         Week.Text = orar.Week;
+        
+        _isNewWindow = false;
+        
         SetIsEnable(false);
     }
 
@@ -55,6 +60,11 @@ public partial class CustomRow : UserControl
 
     private async void Delete_OnClick(object sender, RoutedEventArgs e)
     {
+        if (_isNewWindow)
+        {
+            if (this.Parent is SimpleStackPanel parent) parent.Children.Remove(this);
+            return;
+        }
         try
         {
             var handler = new HttpClientHandler

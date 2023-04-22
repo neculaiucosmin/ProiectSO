@@ -54,7 +54,7 @@ public partial class MainWindow : Window
     private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
         
-        if (!string.IsNullOrEmpty(Search.Text)&&Regex.IsMatch(Search.Text,@"^[0-9]+$"))
+        if (!string.IsNullOrEmpty(Search.Text)&&Regex.IsMatch(Search.Text,@"^[0-9]+[A-Z]?$"))
         {
             MyItemsControl.Children.Clear();
             await Request(Search.Text);
