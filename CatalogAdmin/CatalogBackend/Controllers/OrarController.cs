@@ -39,7 +39,19 @@ public class OrarController : Controller
         if (orar.IsNullOrEmpty()) return NotFound();
         return orar;
     }
-    
+
+    [HttpGet("{grp}/{year}")]
+    public async Task<ActionResult<IEnumerable<Orar>>> GetOrarByGrpAndYear(string grp, short year)
+    {
+        if (_context.Orars == null) return NotFound();
+
+        var orar = await _context.Orars.Where(o => o.Grp == grp && o.Year == year).ToListAsync();
+        if (orar.IsNullOrEmpty()) return NotFound();
+
+        return orar;
+    }
+
+
     //Http post requests: 
     [HttpPost]
     public async Task<ActionResult<Orar>> PostOrar(Orar orar)

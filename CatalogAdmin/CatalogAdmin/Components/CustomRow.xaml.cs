@@ -15,7 +15,7 @@ namespace CatalogAdmin.Components;
 /// </summary>
 public partial class CustomRow : UserControl
 {
-    private readonly Orar _orar;
+    private readonly Orar? _orar;
     private bool _isNewWindow = true;
     public CustomRow()
     {
@@ -75,7 +75,7 @@ public partial class CustomRow : UserControl
 
             // Create a new HttpClient with the configured handler.
             var client = new HttpClient(handler);
-            var responseMessage = await client.DeleteAsync($"https://localhost:44346/orar/v1/{_orar.Id}");
+            var responseMessage = await client.DeleteAsync($"https://localhost:7069/orar/v1/{_orar.Id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 Delete.BorderBrush = new SolidColorBrush(Colors.LawnGreen);
@@ -127,7 +127,7 @@ public partial class CustomRow : UserControl
         
         var orarJson = JsonConvert.SerializeObject(orar);
         var content = new StringContent(orarJson, System.Text.Encoding.UTF8, "application/json");
-        var responseMessage = await client.PostAsync("https://localhost:44346/orar/v1", content);
+        var responseMessage = await client.PostAsync("https://localhost:7069/orar/v1", content);
         if (responseMessage.IsSuccessStatusCode)
         {
             SetIsEnable(false);

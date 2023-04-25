@@ -15,14 +15,14 @@ namespace CatalogAdmin;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private List<Orar> _orars;
+    private List<Orar>? _orars;
 
     public MainWindow()
     {
         InitializeComponent();
     }
 
-    private async Task Request(string grp)
+    private async Task Request(string grp, string? year = null)
     {
         try
         {
@@ -34,13 +34,20 @@ public partial class MainWindow : Window
 
             // Create a new HttpClient with the configured handler.
             var client = new HttpClient(handler);
-
-            var responseMessage = await client.GetAsync($"https://localhost:44346/orar/v1/{grp}");
+            HttpResponseMessage responseMessage;
+            if (year is null)
+            {
+                responseMessage = await client.GetAsync($"https://localhost:7069/orar/v1/{grp}");
+            }
+            else
+            {
+                responseMessage = await client.GetAsync($"https://localhost:7069/orar/v1/{grp}/{year}");
+            }    
 
             if (responseMessage.IsSuccessStatusCode)
             {
                 var responseBody = await responseMessage.Content.ReadAsStringAsync();
-                _orars = JsonConvert.DeserializeObject<List<Orar>>(responseBody);
+                _orars = JsonConvert.DeserializeObject<List<Orar>>(responseBody) ?? throw new InvalidOperationException();
                 foreach (var orar in _orars) MyItemsControl.Children.Add(new CustomRow(orar));
             }
         }
@@ -50,6 +57,7 @@ public partial class MainWindow : Window
             throw;
         }
     }
+    
 
     private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
@@ -57,7 +65,10 @@ public partial class MainWindow : Window
         if (!string.IsNullOrEmpty(Search.Text)&&Regex.IsMatch(Search.Text,@"^[0-9]+[A-Z]?$"))
         {
             MyItemsControl.Children.Clear();
-            await Request(Search.Text);
+            if (Year.SelectedIndex != -1)
+                await Request(Search.Text, Year.Text);
+            else
+                await Request(Search.Text);
         }
         else
         {
