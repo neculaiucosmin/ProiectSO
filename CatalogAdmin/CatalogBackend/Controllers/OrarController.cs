@@ -1,5 +1,6 @@
 using CatalogBackend.Context;
 using CatalogBackend.Entities;
+using CatalogBackend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -12,12 +13,15 @@ namespace CatalogBackend.Controllers;
 public class OrarController : Controller
 {
     private readonly MyDbContext _context;
+    private readonly IMailService _mailService;
 
     //Get controller for all entities from database 
-    public OrarController(MyDbContext context)
+    public OrarController(MyDbContext context, IMailService mailService)
     {
         _context = context;
+        _mailService = mailService;
     }
+    
 
     //Http Controller -> return all rows in database
     [HttpGet]
@@ -102,4 +106,13 @@ public class OrarController : Controller
     {
         return (_context.Orars?.Any(e => e.Id == id)).GetValueOrDefault();
     }
+    //Mail endpoint
+    [HttpPost("send_mail")]
+    public async Task<ActionResult<MailRequest>> SendMail(MailRequest request)
+    {
+        Console.WriteLine(request.ToString());
+        await _mailService.SendEmailAsync(request);
+        return Ok();
+    }
+    
 }

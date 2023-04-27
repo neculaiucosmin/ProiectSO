@@ -9,13 +9,13 @@ namespace OrarCron;
 
 public class OrarProvider
 {
-    public async Task <List<string>> GoToUPG(int sem)
+public async Task <List<string>> GoToUPG(int sem)
     {
         var options = new ChromeOptions();
         options.AddArguments("start-maximized");
         var driver = new ChromeDriver(options);
-        driver.Navigate().GoToUrl("http://ac.upg-ploiesti.ro/orar.php");
-        var listOfLinks = driver.FindElements(By.CssSelector("li>a")).Select(s => s.GetAttribute("href")).ToList();
+        driver.Navigate().GoToUrl("http://ac.upg-ploiesti.ro/orar.php"); 
+        var listOfLinks = driver.FindElements(By.CssSelector("li>a")).Select(s => s.GetAttribute("href")).ToList() ??throw new Exception();
         Thread.Sleep(300);
         var listOfOrareSem2 = new List<string>();
 
@@ -91,23 +91,25 @@ public class OrarProvider
                     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
             var client = new HttpClient(handler);
-            
-            var content = new StringContent(string.Empty, Encoding.UTF8, "application/json");
-            //var queryParams = $"?ToEmail={Uri.EscapeDataString(mailRequest.ToEmail)}&Subject={Uri.EscapeDataString(mailRequest.Subject)}&Body={Uri.EscapeDataString(mailRequest.Body)}";
-            var response = await client.PostAsync($"https://localhost:7069/api/send_mail?ToEmail={mailRequest.ToEmail}%40mail.com&Subject={mailRequest.Subject}&Body={mailRequest.Body}%20",null);
-            // var content = new StringContent(mailJson, Encoding.UTF8, "application/json");
-            //
-            // var response = await client.PostAsync("https://localhost:7069/api/send_mail", content);
+
+            var mailJson = JsonConvert.SerializeObject(mailRequest);
+            var content = new StringContent(mailJson, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync("https://localhost:7069/orar/v1/send_mail", content);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"Response status code: {response.StatusCode}");
                 throw new HttpRequestException();
             }
+
+            Console.WriteLine(response.StatusCode);
+            Console.ReadKey();
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
             Console.WriteLine("Ceva nu a functionat");
+            Console.ReadKey();
             throw;
         }
     }
