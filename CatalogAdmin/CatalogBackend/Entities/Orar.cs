@@ -23,5 +23,4 @@ public class Orar
     public string? Teacher { get; set; }
 
     public string? Week { get; set; }
-    
 }

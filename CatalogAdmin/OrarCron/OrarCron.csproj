@@ -8,11 +8,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Selenium.WebDriver" Version="4.9.0" />
+        <PackageReference Include="Selenium.WebDriver" Version="4.9.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Orare" />
+        <Folder Include="Orare"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="Microsoft.AspNetCore.Http.Features">
+            <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.AspNetCore.App\7.0.5\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+        </Reference>
     </ItemGroup>
 
 </Project>

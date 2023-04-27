@@ -36,18 +36,15 @@ public partial class MainWindow : Window
             var client = new HttpClient(handler);
             HttpResponseMessage responseMessage;
             if (year is null)
-            {
                 responseMessage = await client.GetAsync($"https://localhost:7069/orar/v1/{grp}");
-            }
             else
-            {
                 responseMessage = await client.GetAsync($"https://localhost:7069/orar/v1/{grp}/{year}");
-            }    
 
             if (responseMessage.IsSuccessStatusCode)
             {
                 var responseBody = await responseMessage.Content.ReadAsStringAsync();
-                _orars = JsonConvert.DeserializeObject<List<Orar>>(responseBody) ?? throw new InvalidOperationException();
+                _orars = JsonConvert.DeserializeObject<List<Orar>>(responseBody) ??
+                         throw new InvalidOperationException();
                 foreach (var orar in _orars) MyItemsControl.Children.Add(new CustomRow(orar));
             }
         }
@@ -57,12 +54,11 @@ public partial class MainWindow : Window
             throw;
         }
     }
-    
+
 
     private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
-        
-        if (!string.IsNullOrEmpty(Search.Text)&&Regex.IsMatch(Search.Text,@"^[0-9]+[A-Z]?$"))
+        if (!string.IsNullOrEmpty(Search.Text) && Regex.IsMatch(Search.Text, @"^[0-9]+[A-Z]?$"))
         {
             MyItemsControl.Children.Clear();
             if (Year.SelectedIndex != -1)

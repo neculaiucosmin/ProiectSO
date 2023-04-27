@@ -1,4 +1,6 @@
 using CatalogBackend.Context;
+using CatalogBackend.Entities;
+using CatalogBackend.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +13,11 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MyDbContext>(e => e.UseSqlServer());
-
+builder.Services.Configure<MailSettings>(new ConfigurationBuilder()
+    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+    .AddJsonFile("appsettings.json")
+    .Build().GetSection("MailSettings"));
+builder.Services.AddTransient<IMailService, MailService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,7 +17,8 @@ namespace CatalogAdmin.Components;
 public partial class CustomRow : UserControl
 {
     private readonly Orar? _orar;
-    private bool _isNewWindow = true;
+    private readonly bool _isNewWindow = true;
+
     public CustomRow()
     {
         InitializeComponent();
@@ -26,7 +28,7 @@ public partial class CustomRow : UserControl
     {
         _orar = orar;
         InitializeComponent();
-        
+
         Group.Text = orar.Grp;
         Class.Text = orar.Class;
         Hours.Text = orar.Hours;
@@ -38,9 +40,9 @@ public partial class CustomRow : UserControl
         Year.Text = orar.Year.ToString();
         Type.Text = orar.Type;
         Week.Text = orar.Week;
-        
+
         _isNewWindow = false;
-        
+
         SetIsEnable(false);
     }
 
@@ -62,9 +64,10 @@ public partial class CustomRow : UserControl
     {
         if (_isNewWindow)
         {
-            if (this.Parent is SimpleStackPanel parent) parent.Children.Remove(this);
+            if (Parent is SimpleStackPanel parent) parent.Children.Remove(this);
             return;
         }
+
         try
         {
             var handler = new HttpClientHandler
@@ -103,7 +106,7 @@ public partial class CustomRow : UserControl
 
     private async void Save_OnClick(object sender, RoutedEventArgs e)
     {
-        Orar orar = new Orar()
+        var orar = new Orar
         {
             Grp = Group.Text,
             DayOffWeek = DayOfWeek.Text,
@@ -124,13 +127,10 @@ public partial class CustomRow : UserControl
         };
 
         var client = new HttpClient(handler);
-        
+
         var orarJson = JsonConvert.SerializeObject(orar);
-        var content = new StringContent(orarJson, System.Text.Encoding.UTF8, "application/json");
+        var content = new StringContent(orarJson, Encoding.UTF8, "application/json");
         var responseMessage = await client.PostAsync("https://localhost:7069/orar/v1", content);
-        if (responseMessage.IsSuccessStatusCode)
-        {
-            SetIsEnable(false);
-        }
+        if (responseMessage.IsSuccessStatusCode) SetIsEnable(false);
     }
 }

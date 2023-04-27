@@ -1,6 +1,5 @@
 ﻿using CatalogBackend.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace CatalogBackend.Context;
 
@@ -21,15 +20,15 @@ public partial class MyDbContext : DbContext
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
 
     {
-        IConfigurationRoot configurationRoot = new ConfigurationBuilder()
+        var configurationRoot = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
             .AddJsonFile("appsettings.json")
             .Build();
         optionsBuilder.UseSqlServer(
             // "Server=DESKTOP-410LQCF;Database=Orar;User Id=admin;Password=123;Trusted_Connection=True;Trust Server Certificate=true"
             // "Server=DESKTOP-S2BF8FQ;Database=Orar;User Id=admin;Password=123;Trusted_Connection=True;Trust Server Certificate=true"
-        configurationRoot.GetConnectionString("LaptopString")
-            );
+            configurationRoot.GetConnectionString("LaptopString")
+        );
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
