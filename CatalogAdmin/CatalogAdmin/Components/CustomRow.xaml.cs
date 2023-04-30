@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using CatalogAdmin.Entities;
 using ModernWpf.Controls;
@@ -14,7 +13,7 @@ namespace CatalogAdmin.Components;
 /// <summary>
 ///     Interaction logic for CustomRow.xaml
 /// </summary>
-public partial class CustomRow : UserControl
+public partial class CustomRow
 {
     private readonly Orar? _orar;
     private readonly bool _isNewWindow = true;
@@ -42,7 +41,7 @@ public partial class CustomRow : UserControl
         Week.Text = orar.Week;
 
         _isNewWindow = false;
-
+        SetColor();
         SetIsEnable(false);
     }
 
@@ -132,5 +131,34 @@ public partial class CustomRow : UserControl
         var content = new StringContent(orarJson, Encoding.UTF8, "application/json");
         var responseMessage = await client.PostAsync("https://localhost:7069/orar/v1", content);
         if (responseMessage.IsSuccessStatusCode) SetIsEnable(false);
+    }
+
+    private void SetColor()
+    {
+        switch (_orar.DayOffWeek.ToLower())
+        {
+            case "luni":
+                bg.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f88440"));
+                break;
+            case "marti":
+                bg.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E0AF51"));
+                break;
+            case "miercuri":
+                bg.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#8367C7"));
+                break;
+            case "joi":
+                bg.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BCF4F5"));
+                break;
+            case "vineri":
+                bg.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#B3E9C7"));
+                break;
+            case "sambata":
+                bg.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F0FFF1"));
+                break;
+            
+            default:
+                bg.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2e4052"));
+                break;
+        }
     }
 }

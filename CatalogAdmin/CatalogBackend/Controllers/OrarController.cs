@@ -106,6 +106,8 @@ public class OrarController : Controller
     {
         return (_context.Orars?.Any(e => e.Id == id)).GetValueOrDefault();
     }
+    
+    
     //Mail endpoint
     [HttpPost("send_mail")]
     public async Task<ActionResult<MailRequest>> SendMail(MailRequest request)

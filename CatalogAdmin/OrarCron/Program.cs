@@ -4,3 +4,5 @@ using OrarCron;
 
 var OrarCron = new OrarProvider();
 await OrarCron.StartCron();
+
+// Console.WriteLine(OrarCron);

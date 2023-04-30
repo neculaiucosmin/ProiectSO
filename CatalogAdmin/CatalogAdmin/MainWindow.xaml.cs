@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using CatalogAdmin.Components;
 using CatalogAdmin.Entities;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using MessageBox = System.Windows.MessageBox;
 
 namespace CatalogAdmin;
 
@@ -42,10 +46,19 @@ public partial class MainWindow : Window
 
             if (responseMessage.IsSuccessStatusCode)
             {
+                var dayOrder = new List<string>
+                {
+                    "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica"
+                };
                 var responseBody = await responseMessage.Content.ReadAsStringAsync();
                 _orars = JsonConvert.DeserializeObject<List<Orar>>(responseBody) ??
                          throw new InvalidOperationException();
-                foreach (var orar in _orars) MyItemsControl.Children.Add(new CustomRow(orar));
+                if (!_orars.IsNullOrEmpty())
+                {
+                    var sortedOrars = _orars.OrderBy(day => dayOrder.IndexOf(day.DayOffWeek ?? throw new InvalidOperationException())).ToList();
+                    _orars = sortedOrars;
+                    foreach (var orar in sortedOrars) MyItemsControl.Children.Add(new CustomRow(orar));
+                }
             }
         }
         catch (Exception e)
@@ -58,7 +71,7 @@ public partial class MainWindow : Window
 
     private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
-        if (!string.IsNullOrEmpty(Search.Text) && Regex.IsMatch(Search.Text, @"^[0-9]+[A-Z]?$"))
+        if (!string.IsNullOrWhiteSpace(Search.Text) && Regex.IsMatch(Search.Text, @"^[0-9]+[A-Z]?$"))
         {
             MyItemsControl.Children.Clear();
             if (Year.SelectedIndex != -1)
@@ -76,4 +89,26 @@ public partial class MainWindow : Window
     {
         MyItemsControl.Children.Add(new CustomRow());
     }
+
+    private void CreatePdf_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (_orars.IsNullOrEmpty())
+        {
+            MessageBox.Show("Niciun orar gasit. Incercati o noua cautare!");
+            return;
+        }
+
+        var folder = new FolderBrowserDialog();
+        folder.RootFolder = Environment.SpecialFolder.Desktop;
+        folder.ShowNewFolderButton = true;
+        folder.ShowDialog();
+        
+        
+        string s = folder.SelectedPath;
+        PdfService pdfService = new PdfService(_orars, Search.Text);
+        pdfService.CreatePdf(s);
+        
+    }
+
+
 }

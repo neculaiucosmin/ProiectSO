@@ -15,19 +15,21 @@
                 <ColumnDefinition Width="Auto" MinWidth="100" />
                 <ColumnDefinition Width="Auto" MinWidth="100" />
                 <ColumnDefinition Width="Auto" MinWidth="100" />
+                <ColumnDefinition Width="Auto" MinWidth="100" />
             </Grid.ColumnDefinitions>
-
-            <TextBox x:Name="Search" Grid.Column="0" Width="150" Margin="3 10 10 9" Padding=" 1 1 1 1"
+            <Button Grid.Column="0" Content="PDF"
+                    Style="{StaticResource ModernButtonStyle}" Height="30" Width="100" Click="CreatePdf_OnClick" />
+            <TextBox x:Name="Search" Grid.Column="1" Width="150" Margin="3 10 10 9" Padding=" 1 1 1 1"
                      Style="{StaticResource ModernTextBoxStyle}" />
-            <ComboBox Grid.Column="1" x:Name="Year" Margin="3" Foreground="Black">
+            <ComboBox Grid.Column="2" x:Name="Year" Margin="3" Foreground="Black">
                 <ComboBoxItem Content="1" />
                 <ComboBoxItem Content="2" />
                 <ComboBoxItem Content="3" />
                 <ComboBoxItem Content="4" />
             </ComboBox>
-            <Button Grid.Column="2" Content="Cauta" Click="ButtonBase_OnClick"
+            <Button Grid.Column="3" Content="Cauta" Click="ButtonBase_OnClick"
                     Style="{StaticResource ModernButtonStyle}" Height="30" Width="100" />
-            <Button Grid.Column="3" Content="Adauga"
+            <Button Grid.Column="4" Content="Adauga"
                     Style="{StaticResource ModernButtonStyle}" Height="30" Width="100" Click="Add_OnClickClick" />
         </Grid>
 

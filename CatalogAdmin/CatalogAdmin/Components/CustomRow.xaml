@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="Auto">
     <Border CornerRadius="5">
-        <ui:SimpleStackPanel Height="75" Background="#E0AF51" Margin="10 10 10 10" Width="Auto">
+        <ui:SimpleStackPanel Height="75" Background="#E0AF51" Margin="10 10 10 10" Width="Auto" x:Name="bg">
             <Grid Height="75">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="100" />

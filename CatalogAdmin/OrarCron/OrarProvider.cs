@@ -1,7 +1,9 @@
 ﻿using System.Net;
 using System.Text;
 using CatalogBackend.Entities;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
@@ -9,13 +11,22 @@ namespace OrarCron;
 
 public class OrarProvider
 {
-public async Task <List<string>> GoToUPG(int sem)
+    private string path;
+
+    public OrarProvider()
+    {
+        JObject config = JObject.Parse(File.ReadAllText(@"..\..\..\folder_path.json"));
+        path = (string)config["path"];
+        Console.WriteLine(path);
+    }
+    public async Task<List<string>> GoToUPG(int sem)
     {
         var options = new ChromeOptions();
         options.AddArguments("start-maximized");
         var driver = new ChromeDriver(options);
-        driver.Navigate().GoToUrl("http://ac.upg-ploiesti.ro/orar.php"); 
-        var listOfLinks = driver.FindElements(By.CssSelector("li>a")).Select(s => s.GetAttribute("href")).ToList() ??throw new Exception();
+        driver.Navigate().GoToUrl("http://ac.upg-ploiesti.ro/orar.php");
+        var listOfLinks = driver.FindElements(By.CssSelector("li>a")).Select(s => s.GetAttribute("href")).ToList() ??
+                          throw new Exception();
         Thread.Sleep(300);
         var listOfOrareSem2 = new List<string>();
 
@@ -57,11 +68,11 @@ public async Task <List<string>> GoToUPG(int sem)
             bytes.Add(client.DownloadData(item));
 
         foreach (var fileName in Directory.GetFiles(
-                     @"C:\Users\cosmi\Desktop\Github\ProiectSO\CatalogAdmin\OrarCron\Orare"))
+                     path))
             Console.WriteLine(fileName);
 
         var DirectoryPaths =
-            Directory.GetFiles(@"C:\Users\cosmi\Desktop\Github\ProiectSO\CatalogAdmin\OrarCron\Orare").ToList();
+            Directory.GetFiles(path).ToList();
         DirectoryPaths.Sort();
         var FilesThatNeedAttention = new StringBuilder("Urmatoarele orare trebuiesc modificate: ");
         for (var i = 0; i < bytes.Count; i++)
