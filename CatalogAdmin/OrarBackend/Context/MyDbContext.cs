@@ -1,8 +1,8 @@
-﻿using CatalogBackend.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using OrarBackend.Entities;
 
-namespace CatalogBackend.Context;
+namespace OrarBackend.Context;
 
 public partial class MyDbContext : DbContext
 {

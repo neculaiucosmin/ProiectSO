@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Text;
 using CatalogBackend.Entities;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OpenQA.Selenium;
@@ -64,7 +63,7 @@ public class OrarProvider
         var client = new WebClient();
         var bytes = new List<byte[]>();
         foreach (var item in ListOfOrars)
-            //client.DownloadFile(item,$@"C:\Users\cosmi\Desktop\Github\ProiectSO\CatalogAdmin\OrarCron\Orare\{item.Replace("http://ac.upg-ploiesti.ro/orar/sem2/","")}");
+            //client.DownloadFile(item,$@"C:\Users\cosmi\Desktop\Github\ProiectSO\OrarAdmin\OrarCron\Orare\{item.Replace("http://ac.upg-ploiesti.ro/orar/sem2/","")}");
             bytes.Add(client.DownloadData(item));
 
         foreach (var fileName in Directory.GetFiles(

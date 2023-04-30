@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CatalogAdmin.Entities;
 using Microsoft.IdentityModel.Tokens;
+using OrarAdmin.Entities;
 using PdfSharpCore.Drawing;
 using PdfSharpCore.Pdf;
 
-namespace CatalogAdmin;
-
+namespace OrarAdmin;
+/// <summary>
+/// Class made for creating a PDF file 
+/// </summary>
 public class PdfService
 {
     private readonly string _grp;
@@ -17,13 +19,15 @@ public class PdfService
     {
         "M1", "M2", "M3", "M4", "M5", "M6", "M7"
     };
-
     public PdfService(List<Orar> orars, string grp)
     {
         _orars = orars;
         _grp = grp;
     }
-
+/// <summary>
+/// Create a PDF in a specific file path
+/// </summary>
+/// <param name="path">Take a path string as param. The pdf file will pe save at path + file.pdf</param>
     public void CreatePdf(string path)
     {
         var document = new PdfDocument();
@@ -48,11 +52,11 @@ public class PdfService
             index++;
         }
            
-       
-
         document.Save(path + @"\file.pdf");
     }
-
+/// <summary>
+/// Equivalent of ToString() 
+/// </summary>
     private string OrarStr(Orar orar)
     {
         return $"{orar.DayOffWeek} | {orar.Module} | {orar.Hours} | {orar.Class} | {orar.Classroom} | {orar.Teacher}";

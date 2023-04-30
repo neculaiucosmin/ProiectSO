@@ -1,6 +1,6 @@
-using CatalogBackend.Context;
-using CatalogBackend.Entities;
-using CatalogBackend.Services;
+using OrarBackend.Context;
+using OrarBackend.Entities;
+using OrarBackend.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

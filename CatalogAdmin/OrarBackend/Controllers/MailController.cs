@@ -1,8 +1,8 @@
-﻿using CatalogBackend.Entities;
-using CatalogBackend.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using OrarBackend.Entities;
+using OrarBackend.Services;
 
-namespace CatalogBackend.Controllers;
+namespace OrarBackend.Controllers;
 
 [Route("api/")]
 public class MailController : Controller

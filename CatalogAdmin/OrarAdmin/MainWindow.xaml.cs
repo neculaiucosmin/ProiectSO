@@ -6,13 +6,13 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
-using CatalogAdmin.Components;
-using CatalogAdmin.Entities;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using OrarAdmin.Components;
+using OrarAdmin.Entities;
 using MessageBox = System.Windows.MessageBox;
 
-namespace CatalogAdmin;
+namespace OrarAdmin;
 
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
@@ -57,8 +57,13 @@ public partial class MainWindow : Window
                 {
                     var sortedOrars = _orars.OrderBy(day => dayOrder.IndexOf(day.DayOffWeek ?? throw new InvalidOperationException())).ToList();
                     _orars = sortedOrars;
+                    sortedOrars = PdfService.OrderByModul(_orars);
                     foreach (var orar in sortedOrars) MyItemsControl.Children.Add(new CustomRow(orar));
                 }
+            }
+            else
+            {
+                MessageBox.Show("Grupa sau anul introduse nu sunt corecte, reincercati");
             }
         }
         catch (Exception e)

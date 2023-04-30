@@ -4,11 +4,11 @@ using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
-using CatalogAdmin.Entities;
 using ModernWpf.Controls;
 using Newtonsoft.Json;
+using OrarAdmin.Entities;
 
-namespace CatalogAdmin.Components;
+namespace OrarAdmin.Components;
 
 /// <summary>
 ///     Interaction logic for CustomRow.xaml
