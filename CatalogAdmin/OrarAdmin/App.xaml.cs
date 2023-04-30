@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace CatalogAdmin;
+namespace OrarAdmin;
 
 /// <summary>
 ///     Interaction logic for App.xaml

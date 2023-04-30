@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogAdmin", "CatalogAdmin\CatalogAdmin.csproj", "{40EF5D9D-723B-4832-A496-AD3D299455D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrarAdmin", "OrarAdmin\OrarAdmin.csproj", "{40EF5D9D-723B-4832-A496-AD3D299455D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogBackend", "CatalogBackend\CatalogBackend.csproj", "{6A457E24-4046-43C8-B701-DA8C792D465D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrarBackend", "OrarBackend\OrarBackend.csproj", "{6A457E24-4046-43C8-B701-DA8C792D465D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orar", "Orar\Orar.csproj", "{B5A8A479-888C-43D8-A3FB-44A521FD1687}"
 EndProject

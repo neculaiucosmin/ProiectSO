@@ -1,4 +1,4 @@
-﻿namespace CatalogBackend.Entities;
+﻿namespace OrarBackend.Entities;
 
 public class MailRequest
 {

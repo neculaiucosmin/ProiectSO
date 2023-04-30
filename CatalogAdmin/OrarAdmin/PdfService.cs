@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CatalogAdmin.Entities;
 using Microsoft.IdentityModel.Tokens;
+using OrarAdmin.Entities;
 using PdfSharpCore.Drawing;
 using PdfSharpCore.Pdf;
 
-namespace CatalogAdmin;
-
+namespace OrarAdmin;
+/// <summary>
+/// 
+/// </summary>
 public class PdfService
 {
     private readonly string _grp;

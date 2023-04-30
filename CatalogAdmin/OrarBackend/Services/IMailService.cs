@@ -1,6 +1,6 @@
-﻿using CatalogBackend.Entities;
+﻿using OrarBackend.Entities;
 
-namespace CatalogBackend.Services;
+namespace OrarBackend.Services;
 
 public interface IMailService
 {

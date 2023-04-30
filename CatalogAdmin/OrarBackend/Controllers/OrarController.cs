@@ -1,11 +1,11 @@
-using CatalogBackend.Context;
-using CatalogBackend.Entities;
-using CatalogBackend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using OrarBackend.Context;
+using OrarBackend.Entities;
+using OrarBackend.Services;
 
-namespace CatalogBackend.Controllers;
+namespace OrarBackend.Controllers;
 
 [Controller]
 [Route("/orar/v1")]

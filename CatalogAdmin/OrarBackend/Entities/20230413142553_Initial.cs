@@ -2,7 +2,7 @@
 
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CatalogBackend.Entities;
+namespace OrarBackend.Entities;
 
 /// <inheritdoc />
 public partial class Initial : Migration

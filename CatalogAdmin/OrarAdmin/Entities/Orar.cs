@@ -1,4 +1,4 @@
-﻿namespace CatalogBackend.Entities;
+﻿namespace OrarAdmin.Entities;
 
 public class Orar
 {

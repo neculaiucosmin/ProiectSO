@@ -1,10 +1,10 @@
-﻿using CatalogBackend.Entities;
-using MailKit.Net.Smtp;
+﻿using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using OrarBackend.Entities;
 
-namespace CatalogBackend.Services;
+namespace OrarBackend.Services;
 
 public class MailService : IMailService
 
