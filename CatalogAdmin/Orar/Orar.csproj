@@ -15,5 +15,6 @@
     <ItemGroup>
       <PackageReference Include="Xamarin.AndroidX.ConstraintLayout" Version="2.1.4.4" />
       <PackageReference Include="Xamarin.AndroidX.ConstraintLayout.Core" Version="1.0.4.4" />
+      <PackageReference Include="Xamarin.AndroidX.ConstraintLayout.Solver" Version="2.0.4.12" />
     </ItemGroup>
 </Project>
