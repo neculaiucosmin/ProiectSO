@@ -28,7 +28,7 @@ public partial class MyDbContext : DbContext
         optionsBuilder.UseSqlServer(
             // "Server=DESKTOP-410LQCF;Database=Orar;User Id=admin;Password=123;Trusted_Connection=True;Trust Server Certificate=true"
             // "Server=DESKTOP-S2BF8FQ;Database=Orar;User Id=admin;Password=123;Trusted_Connection=True;Trust Server Certificate=true"
-        configurationRoot.GetConnectionString("PcString")
+        configurationRoot.GetConnectionString("LaptopString")
             );
     }
 
